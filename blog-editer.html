@@ -86,6 +86,7 @@ V_{BE} &: {\small \textrm{B-E}}間順方向電圧
     $(function () {
         let load_num=0;
         let previous_html="";
+        let event_flag=0;
         marked.setOptions({
             // code要素にdefaultで付くlangage-を削除
             langPrefix: '',
@@ -95,7 +96,7 @@ V_{BE} &: {\small \textrm{B-E}}間順方向電圧
             }
         });
         $('#markdown_editor_textarea').keyup(function () {
-            let html = marked($(this).val());
+            //let html = marked($(this).val());
             // $('#markdown_preview').html(html);
 
             /*
@@ -104,19 +105,26 @@ V_{BE} &: {\small \textrm{B-E}}間順方向電圧
             el.textContent='MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "all" } }});'
             document.body.appendChild(el); // BODY要素の最後に追加
             */
-            if(previous_html!=html){
-                previous_html=html;
-                load_num++;
-                console.log("load_num:",load_num);
-                $.post({
-                    url: 'blog-text-save.php',
-                    data:{"blog_text": html},
-                    dataType: 'json' //必須。json形式で返すように設定
-                }).done(function(data){
-                    document.getElementById("markdown_preview").contentWindow.location.reload();
-                }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-                    alert(errorThrown);
-                })
+            if( event_flag===0){
+                event_flag=1;
+                window.setTimeout(function(){
+                    event_flag=0;
+                    html = marked($('#markdown_editor_textarea').val());
+                    if(previous_html!=html){
+                        previous_html=html;
+                        load_num++;
+                        console.log("load_num:",load_num);
+                        $.post({
+                            url: 'blog-text-save.php',
+                            data:{"blog_text": html},
+                            dataType: 'json' //必須。json形式で返すように設定
+                        }).done(function(data){
+                            document.getElementById("markdown_preview").contentWindow.location.reload();
+                        }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+                            alert(errorThrown);
+                        })
+                    }
+                }, 1000);            
             }
         });
         /*

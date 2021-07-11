@@ -49,8 +49,8 @@ $$I\_b=\frac{2V\_{cc}-V\_{CE(SAT)}-V\_{be}}{R\_b} \label{Ib}$$
 $$I\_c=h\_{FE}\cdot I\_b \label{Ic}$$
 
 \\[\because \begin{cases}
-T\_rがON時であり\\\\
-V\_{CE(SAT)}\ll LEDの順方向電圧なので\\\\
+T\_rが{\small \textrm{ON}}時であり\\\\
+V\_{CE(SAT)}\ll \textrm{LED} \\ の順方向電圧なので\\\\
 R\_Cに流れる電流は無視できる。
 \end{cases} \\]
 
@@ -76,7 +76,7 @@ $$T\_1=h\_{FE}\cdot \frac{2L}{R\_b}$$
 となる。
 このようにコイルに蓄積出来る有限電流値\\(I\_C\\)および有限時間\\(T\_1\\)が生成される。
 
-\\(T\_r= \textrm{OFF} \\)  期間（ \\(T\_2\\)期間）
+# \\(T\_r= \textrm{OFF} \\)  期間（ \\(T\_2\\)期間）
 \\(T\_r= \textrm{ON} \\)  期間（\\(T\_1\\)期間）にてコイルにチャージした電流\\(I\_C\\)を抵抗\\(R\_C\\)及び(LED)に供給する期間。
 つまり\\(T\_r= \textrm{OFF} \\)になった瞬間からのかと応答を考えればよく、ラプラス演算子sを用いたウラ回路で表現する（s領域で考える）。
 \\(T\_r= \textrm{OFF} \\)となったときを時間原点\\(t=0\\)とし、コイルは電流出力なので、過渡応答に無関係な（定常な）LED順方向電圧は無視できる（0（ショート）と考える）。
@@ -123,9 +123,9 @@ $$ v\_{2}(t)=V\_{CC}-I\_c \cdot R\_C \cdot e^{-\frac{R\_C}{L\_1}t} $$
 さて\\(T_r\\)がオンする条件は概ね\\( v_{2}(t) \gg V_{BE}\\)と考えると、
 $$ v_{2}(t) = V_{BE} $$
 上式より
-\[I_C \cdot R_c e^{-\frac{R_c}{L}t_2}=V_{CC}-V_{BE}\]
+\\[I_C \cdot R_c e^{-\frac{R_c}{L}t_2}=V_{CC}-V_{BE}\\]
 \\(t_2\\)を求めると
-\[t_2=\frac{L}{R_c}ln\{\frac{I_C \cdot R_c}{V_{CC}-V_{BE}}\}\]
+\\[t_2=\frac{L}{R_c}ln\{\frac{I_C \cdot R_c}{V_{CC}-V_{BE}}\}\\]
 \begin{eqnarray} \because \begin{cases}
 e^{-\frac{R_c}{L}t_2}&=&\frac{V_{CC}-V_{BE}}{I_C \cdot R_c}\\\\
 e^{-\frac{R_c}{L}t_2}&=&\frac{I_C \cdot R_c}{V_{CC}-V_{BE}}\\\\
@@ -133,22 +133,22 @@ e^{-\frac{R_c}{L}t_2}&=&\frac{I_C \cdot R_c}{V_{CC}-V_{BE}}\\\\
 t_2 &=& \frac{L}{R_c}ln(\frac{I_C \cdot R_c}{V_{CC}-V_{BE}})\\\\
  \end{cases} \end{eqnarray}
 よって
-\[T_2=\frac{L}{R_c}ln(h_{FE}\cdot \frac{R_c}{R_b}\cdot \frac{2V_{CC}-V_{CE(SAT)}-V_{BE}}{V_{CC}-V_{BE}})\]
+\\[T_2=\frac{L}{R_c}ln(h_{FE}\cdot \frac{R_c}{R_b}\cdot \frac{2V_{CC}-V_{CE(SAT)}-V_{BE}}{V_{CC}-V_{BE}})\\]
 において
 \begin{cases}
 V_{CE(SAT)}=0\\\\
 V_{BE}=0
 \end{cases}
 と考えると
-\[T_2=\frac{L}{R_c}ln(2\cdot h_{FE}\cdot \frac{R_c}{R_b})\]
+\\[T_2=\frac{L}{R_c}ln(2\cdot h_{FE}\cdot \frac{R_c}{R_b})\\]
 となる。
 
 
 このように有限のオフ期間\\(T_2\\)が生成されます。そして再びオン期間（充電プロセス）に移行し、この交代をひたすら繰り返します。これがブロッキング発振回路のメカニズムです。最後に発振周期（発振周波数）を導出しておきます。
 発振周期\\(T\\)は
-\[T=T_1+T_2\]
+\\[T=T_1+T_2\\]
 よって
-\[T=h_{FE}\cdot \frac{L}{R_b}\cdot \frac{2V_{CC}-V_{CE(SAT)}-V_{BE}}{V_{CC}-V_{BE}}+\frac{L}{R_c}ln(h_{FE}\cdot \frac{R_c}{R_b}\cdot \frac{2V_{CC}-V_{CE(SAT)}-V_{BE}}{V_{CC}-V_{CE(SAT)}})\]
+\\[T=h_{FE}\cdot \frac{L}{R_b}\cdot \frac{2V_{CC}-V_{CE(SAT)}-V_{BE}}{V_{CC}-V_{BE}}+\frac{L}{R_c}ln(h_{FE}\cdot \frac{R_c}{R_b}\cdot \frac{2V_{CC}-V_{CE(SAT)}-V_{BE}}{V_{CC}-V_{CE(SAT)}})\\]
 である。
 また
 \begin{cases}
@@ -156,6 +156,7 @@ V_{CE(SAT)}=0\\\\
 V_{BE}=0
 \end{cases}
 とみなした場合は
-\[T=2h_{FE}\cdot \frac{L}{R_b}+\frac{L}{R_c}ln(2h_{FE}\cdot \frac{R_c}{R_b})\]
+\\[T=2h_{FE}\cdot \frac{L}{R_b}+\frac{L}{R_c}ln(2h_{FE}\cdot \frac{R_c}{R_b})\\]
 となる。
+
 発振周波数\\(f=\frac{1}{T}\\)である。
