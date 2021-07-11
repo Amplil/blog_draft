@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-	<script type="text/javascript"
-			src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML\_HTMLorMML">
-			MathJax.Hub.Config({
-					TeX: { equationNumbers: { autoNumber: "all" } }
-			});
-	</script>
-
-    <meta charset="utf-8">
-    <title>tex下書き　ブロッキング回路</title>
-</head>
-
-<body>
 トランスの結合条件は
 \begin{cases}
 L\_1=L\_2=L\\\\
@@ -175,7 +159,3 @@ V_{BE}=0
 \[T=2h_{FE}\cdot \frac{L}{R_b}+\frac{L}{R_c}ln(2h_{FE}\cdot \frac{R_c}{R_b})\]
 となる。
 発振周波数\\(f=\frac{1}{T}\\)である。
-
-
-</body>
-</html>
