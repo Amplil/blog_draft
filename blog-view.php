@@ -16,12 +16,10 @@
             color: #454545;
             margin-bottom: 20px;
         }
-
         h2 {
             background: linear-gradient(transparent 70%, #a7d6ff 70%);
             margin-bottom: 20px;
         }
-
         h3 {
             color: #010079;
             text-shadow: 0 0 5px white;
@@ -30,7 +28,6 @@
             background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px, #e9f4ff 3px, #e9f4ff 7px);
             margin-bottom: 20px;
         }
-
         pre {
             padding: 20px;
         }
@@ -38,22 +35,6 @@
 </head>
 
 <body>
-<!--    
-トランスの結合条件は
-\begin{cases}
-L_1=L_2=L\\
-n_1:n_2=1:1\\
-K=1 \qquad (結合係数)
-\end{cases}
-とする。
-
-トランジスタ\(T_r\)の特性
-\begin{cases}
-h_{FE} &: 直流電流増幅率\\
-V_{CE(SAT)} &: {\small \textrm{C-E}} 間飽和電圧\\
-V_{BE} &: {\small \textrm{B-E}}間順方向電圧
-\end{cases}
--->
 
 <?php
 session_start();
@@ -61,9 +42,7 @@ $blog_text ='';
 if (isset($_SESSION['blog_text'])) {
     $blog_text = $_SESSION['blog_text'];
 }
-//$blog_text=file_get_contents("blocking-circuit.md");
 echo $blog_text;
-
 ?>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -73,12 +52,10 @@ echo $blog_text;
                 TeX: { equationNumbers: { autoNumber: "all" } }
         });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
-
 
 </body>
 </html>

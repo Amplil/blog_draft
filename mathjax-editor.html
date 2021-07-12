@@ -6,80 +6,25 @@
     <title>ブログエディタ</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/solarized-dark.min.css">
-    <style>
-        h1 {
-            background: #dfefff;
-            box-shadow: 0px 0px 0px 5px #dfefff;
-            border: dashed 1px #96c2fe;
-            padding: 0.2em 0.5em;
-            color: #454545;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            background: linear-gradient(transparent 70%, #a7d6ff 70%);
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            color: #010079;
-            text-shadow: 0 0 5px white;
-            padding: 0.3em 0.5em;
-            background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px, #e9f4ff 3px, #e9f4ff 7px);
-            background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px, #e9f4ff 3px, #e9f4ff 7px);
-            margin-bottom: 20px;
-        }
-
-        pre {
-            padding: 20px;
-        }
-    </style>
 </head>
 
 <body>
 <div class="row">
     <div class="col-5 m-1">
         <!-- ここに入力-->
-        <textarea name="article" id="markdown_editor_textarea" cols="30" rows="30" class="form-control"></textarea>
+        <textarea name="article" id="editor_area" cols="30" rows="30" class="form-control"></textarea>
     </div>
     <div class="col-6 m-1 border">
         <!-- ここに出力される -->
-        <iframe src="blog-view.php" id="markdown_preview" width="100%" height="100%"></iframe>
+        <iframe src="blog-view.php" id="preview" width="100%" height="100%"></iframe>
     </div>
 </div>
 
-<!--    
-トランスの結合条件は
-\begin{cases}
-L_1=L_2=L\\
-n_1:n_2=1:1\\
-K=1 \qquad (結合係数)
-\end{cases}
-とする。
-
-トランジスタ\(T_r\)の特性
-\begin{cases}
-h_{FE} &: 直流電流増幅率\\
-V_{CE(SAT)} &: {\small \textrm{C-E}} 間飽和電圧\\
-V_{BE} &: {\small \textrm{B-E}}間順方向電圧
-\end{cases}
--->
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!--    
-<script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        MathJax.Hub.Config({
-                TeX: { equationNumbers: { autoNumber: "all" } }
-        });
-</script>
--->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
 
 <script>
     // マークダウンをプレビュー画面に表示する
@@ -92,24 +37,16 @@ V_{BE} &: {\small \textrm{B-E}}間順方向電圧
             langPrefix: '',
             // highlightjsを使用したハイライト処理を追加
             highlight: function (code, lang) {
-            return hljs.highlightAuto(code, [lang]).value
+                return hljs.highlightAuto(code, [lang]).value
             }
         });
-        $('#markdown_editor_textarea').keyup(function () {
+        $('#editor_area').keyup(function () {
             //let html = marked($(this).val());
-            // $('#markdown_preview').html(html);
-
-            /*
-            var el = document.createElement("script"); // SCRIPTタグの生成
-            el.src = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"; // SCRIPTタグのSRC属性に読み込みたいファイルを指定
-            el.textContent='MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "all" } }});'
-            document.body.appendChild(el); // BODY要素の最後に追加
-            */
             if( event_flag===0){
                 event_flag=1;
                 window.setTimeout(function(){
+                    let html = marked($('#editor_area').val());
                     event_flag=0;
-                    html = marked($('#markdown_editor_textarea').val());
                     if(previous_html!=html){
                         previous_html=html;
                         load_num++;
@@ -119,12 +56,12 @@ V_{BE} &: {\small \textrm{B-E}}間順方向電圧
                             data:{"blog_text": html},
                             dataType: 'json' //必須。json形式で返すように設定
                         }).done(function(data){
-                            document.getElementById("markdown_preview").contentWindow.location.reload();
+                            document.getElementById("preview").contentWindow.location.reload();
                         }).fail(function(XMLHttpRequest, textStatus, errorThrown){
                             alert(errorThrown);
                         })
                     }
-                }, 1000);            
+                }, 1000);
             }
         });
         /*
@@ -140,7 +77,6 @@ V_{BE} &: {\small \textrm{B-E}}間順方向電圧
             }
         });
         */
-
     });
 
 </script>
