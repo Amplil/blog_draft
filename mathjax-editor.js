@@ -11,11 +11,14 @@ $(function () {
     let event_flag=0;
     marked.setOptions({
         // code要素にdefaultで付くlangage-を削除
+        langPrefix: ''
+        /*
         langPrefix: '',
         // highlightjsを使用したハイライト処理を追加
         highlight: function (code, lang) {
             return hljs.highlightAuto(code, [lang]).value
         }
+        */
     });
     $('#editor_area').keyup(function () {
         //let html = marked($(this).val());
@@ -86,3 +89,58 @@ function preview_disp(){
         })
     }
 }
+
+function OnButtonClick() {
+    let fileRef = document.getElementById('mdfile');
+    //var outFrame = document.getElementById('output');
+    if (1 <= fileRef.files.length) {
+        let reader = new FileReader();
+        reader.onload = function (theFile) {
+            let file_text = theFile.target.result;
+            //outhtml = outhtml.replace(/\r\n/g, '<br/>');
+            $('#editor_area').val(file_text);
+            preview_disp();
+            //editor_area.innerHTML = outhtml; // reader.result;
+        }
+        reader.readAsText(fileRef.files[0], "utf-8");
+    }
+}
+
+//$('[data-toggle="tooltip"]').tooltip();
+//$.widget.bridge('uitooltip', $.ui.tooltip);
+//$(target).find('[data-toggle="tooltip"]').tooltip();
+
+let range = document.createRange();
+let copyResult="";
+setTimeout(function () {
+    $('#copy-button')
+    //$('[data-toggle="tooltip"]')
+    // tooltip設定
+    .tooltip({
+        trigger: 'manual',
+        placement:'right'
+    })
+    // tooltip表示後の動作を設定
+    .on('shown.bs.tooltip', function(){
+        setTimeout((function(){
+            $(this).tooltip('hide');
+        }).bind(this), 1500);
+    })
+    // クリック時の動作を設定
+    .on('click', function(){
+        //range = document.createRange();
+        //range.selectNode(editor_area);
+        //window.getSelection().addRange(range);
+        editor_area.select();
+        copyResult = document.execCommand('copy');
+        //console.log(copyResult)
+        // コピー結果によって表示変更
+        if(copyResult){
+            $('#copy-button').attr('data-bs-original-title', 'コピーしました');
+        }else{
+            $('#copy-button').attr('data-bs-original-title', 'コピー失敗しました');
+        }
+        // tooltip表示
+        $(this).tooltip('show');
+    });
+}, 545*1.33); // 545ms timing to load jQuery.js + network estimated delay 
