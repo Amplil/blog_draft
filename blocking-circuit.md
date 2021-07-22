@@ -1,3 +1,4 @@
+![ブロッキング回路図1](https://electronic-handicraft.work/wordpress/wp-content/uploads/2021/07/ブロッキング回路図1-1.png)
 トランスの結合条件は
 \begin{cases}
 L\_1=L\_2=L\\\\
