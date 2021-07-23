@@ -5,7 +5,7 @@ let load_num=0;
 let plain_text=localStorage.getItem('plain_text');
 //console.log(plain_text);
 $('#editor_area').val(plain_text);
-preview_disp();
+preview_disp_scroll();
 
 $(function () {
     let event_flag=0;
@@ -20,13 +20,15 @@ $(function () {
         }
         */
     });
+    // 編集画面で何らかのキーが押されたとき
     $('#editor_area').keyup(function () {
         //let html = marked($(this).val());
         if( event_flag===0){
             event_flag=1;
             window.setTimeout(function(){
                 event_flag=0;
-                preview_disp();
+                //preview_disp(); // スクロールは合わせない
+                preview_disp_scroll(); // 編集される度にHTMLが作られるため、スクロールを合わせる必要がある
             }, 1000);
         }
     });
@@ -52,10 +54,10 @@ $(function () {
 // スクロールしたときにスクロール位置を合わせる
 function scroll_follow_up(){
     let editorTop=editor_area.scrollTop; // editorのスクロールした位置の上部座標
-    let editorWindow=editor_area.clientHeight; // editorのウィンドウ（表示される枠）の高さ
+    //let editorWindow=editor_area.clientHeight; // editorのウィンドウ（表示される枠）の高さ
     let editorHeight=editor_area.scrollHeight; // editorの全体の高さ
     //let previewTop=preview.contentWindow.pageYOffset; // iframeの場合のスクロールした位置の上部座標
-    let previewWindow=preview.contentWindow.innerHeight; // iframeのウィンドウ（表示される枠）の高さ
+    //let previewWindow=preview.contentWindow.innerHeight; // iframeのウィンドウ（表示される枠）の高さ
     let previewHeight=preview.contentDocument.documentElement.scrollHeight; // iframeの全体の高さ
     //console.log('editorのスクロールした位置の上部座標',editorTop);
     //console.log('editorの全体の高さ',editorHeight);
@@ -63,7 +65,9 @@ function scroll_follow_up(){
     //console.log('iframeのスクロールした位置の上部座標',previewTop);
     //console.log('iframeの全体の高さ',previewHeight);
     //console.log('iframeのウィンドウ（表示される枠）の高さ',previewWindow);
-    preview.contentWindow.scrollTo(0,previewHeight*(editorTop+editorWindow)/editorHeight-previewWindow); // 何％の高さのところにeditorのスクロールした位置がきているか
+
+    //preview.contentWindow.scrollTo(0,previewHeight*(editorTop+editorWindow)/editorHeight-previewWindow); // 何％の高さのところにeditorのスクロールした位置がきているか
+    preview.contentWindow.scrollTo(0,previewHeight*editorTop/editorHeight); // 何％の高さのところにeditorのスクロールした位置がきているか
 }
 
 // マークダウンをプレビュー画面に表示する
@@ -81,16 +85,30 @@ function preview_disp(){
             dataType: 'json' //必須。json形式で返すように設定
         }).done(function(data){
             document.getElementById("preview").contentWindow.location.reload();
+            /*
             window.setTimeout(function(){
                 scroll_follow_up(); // スクロールを合わせる
             }, 1000);
+            */
         }).fail(function(XMLHttpRequest, textStatus, errorThrown){
             alert(errorThrown);
         })
     }
 }
+// マークダウンをプレビュー画面に表示し、スクロールを合わせる
+function preview_disp_scroll(){
+    preview_disp();
+    window.setTimeout(function(){
+        scroll_follow_up(); // スクロールを合わせる
+    }, 1000);
+}
 
-function OnButtonClick() {
+// セレクトファイルボタンがクリックされたとき
+function slectfileClick() {
+    $('#upfile_btn').addClass('bg-warning');
+}
+// アップロードボタンがクリックされたとき
+function upfileClick() {
     let fileRef = document.getElementById('mdfile');
     //var outFrame = document.getElementById('output');
     if (1 <= fileRef.files.length) {
@@ -101,6 +119,7 @@ function OnButtonClick() {
             $('#editor_area').val(file_text);
             preview_disp();
             //editor_area.innerHTML = outhtml; // reader.result;
+            $('#upfile_btn').removeClass('bg-warning');
         }
         reader.readAsText(fileRef.files[0], "utf-8");
     }
