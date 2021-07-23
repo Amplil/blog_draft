@@ -102,7 +102,7 @@ function preview_disp_scroll(){
         scroll_follow_up(); // スクロールを合わせる
     }, 1000);
 }
-
+/*
 // セレクトファイルボタンがクリックされたとき
 function slectfileClick() {
     $('#upfile_btn').addClass('bg-warning');
@@ -124,6 +124,26 @@ function upfileClick() {
         reader.readAsText(fileRef.files[0], "utf-8");
     }
 }
+*/
+// 読み込みファイルの内容が変わったとき
+$(function () {
+    $('#mdfile').change(function(){
+        let fileRef = document.getElementById('mdfile');
+        //var outFrame = document.getElementById('output');
+        if (1 <= fileRef.files.length) {
+            let reader = new FileReader();
+            reader.onload = function (theFile) {
+                let file_text = theFile.target.result;
+                //outhtml = outhtml.replace(/\r\n/g, '<br/>');
+                $('#editor_area').val(file_text);
+                preview_disp();
+                //editor_area.innerHTML = outhtml; // reader.result;
+                //$('#upfile_btn').removeClass('bg-warning');
+            }
+            reader.readAsText(fileRef.files[0], "utf-8");
+        }
+    });
+});
 
 //$('[data-toggle="tooltip"]').tooltip();
 //$.widget.bridge('uitooltip', $.ui.tooltip);
