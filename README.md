@@ -1,2 +1,2 @@
 # ブログの下書き
-ブログ[アイデア！電子工作](https://electronic-handicraft.work)の下書きです。
+ブログ[アイデア！テック](https://ideatech.blog/)の下書きです。
