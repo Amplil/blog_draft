@@ -1,4 +1,3 @@
-<!-- 目次は現在wordpress上で有効にならないのでやめる -->
 # はじめに
 秀和システムが出版している『親子で電子工作入門&nbsp;ラズパイとスマホでラジコン戦車を作ろう！』をラズパイゼロで動かすのが、この記事でやりたいことです。
 
@@ -8,7 +7,6 @@
 
 このラジコン戦車のキットですが、Raspberry Pi3 が付属しているセットがamazonにて販売されています。
 
-<!--ラジコン戦車を作りたいだけなのに、無駄にスペックが高い部品ばかりな気がします。そもそも、これくらいのプログラムなら[ラズパイ3](https://a.r10.to/hboCpt)を使わずとも[ラズパイゼロ](https://www.amazon.co.jp/gp/product/B076BHY12Y/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B076BHY12Y&linkCode=as2&tag=aikotobahaabu-22&linkId=38e5828a1a3829ffe12b54adf5833df5)で十分動くわけです。-->
 ラジコン戦車は、ラズパイゼロでも動かすことが出来ます。 ラズパイゼロを使えば消費電力は小さく、購入価格も安く済むので、バッテリも小さくて安いもので十分動作するわけです。
 
 ということで、[ラズパイゼロ](https://www.amazon.co.jp/gp/product/B076BHY12Y/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B076BHY12Y&linkCode=as2&tag=aikotobahaabu-22&linkId=38e5828a1a3829ffe12b54adf5833df5)で動かしてみました。
@@ -36,15 +34,15 @@ https://qiita.com/henjiganai/items/2b39dd8cbc3cc3cbe4a4
 
 「 Advanced Options 」から「 Expand Filesystem 」を選択します。
 
-![Expand Filesystem](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-093655_1824x984_scrot.png)
+![Expand Filesystem](https://res.cloudinary.com/ideatech/image/upload/v1650411048/2019-07-10-093655_1824x984_scrot_mxmt0l.png)
 
 今回のラジコン戦車ではI2C通信を使うため、「I2C」を有効にします。
 
-![i2c](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-093855_1824x984_scrot2.png)
+![i2c](https://res.cloudinary.com/ideatech/image/upload/v1650411051/2019-07-10-093855_1824x984_scrot2_xgjjjz.png)
 
 デスクトップにあるスタートボタンから、設定→Raspberry Piの設定と進み、ホスト名を変更します。
 
-![host name](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-100614_1824x984_scrot2-1.png)
+![host name](https://res.cloudinary.com/ideatech/image/upload/v1650411061/2019-07-10-100614_1824x984_scrot2-1_bhuvuh.png)
 
 ここで一旦再起動しておきます。
 
@@ -68,7 +66,7 @@ Bluetoothサービスの設定ファイルに変更を加えます。
 
 を付け加えます。
 
-![](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-094541_1824x984_scrot2-1.png)
+![](https://res.cloudinary.com/ideatech/image/upload/v1650411064/2019-07-10-094541_1824x984_scrot2-1_sana70.png)
 
 hci0を有効にします。
 
@@ -83,7 +81,7 @@ hci0が起動時に自動的に有効になるファイルを新しく作成し�
     # Set bluetooth power up
     ACTION=="add", KERNEL=="hci0", RUN+="/usr/bin/hciconfig hci0 up"
 
-![](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-095410_1824x984_scrot2.png)
+![](https://res.cloudinary.com/ideatech/image/upload/v1650411067/2019-07-10-095410_1824x984_scrot2_oo3aac.png)
 
 Bluetoothを常に待ち受け状態にします。
 
@@ -91,7 +89,7 @@ Bluetoothを常に待ち受け状態にします。
 
 「DiscoverableTimeout」と「PairrableTimeout」の行の「#」を削除します。
 
-![](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-095511_1824x984_scrot2-1.png)
+![](https://res.cloudinary.com/ideatech/image/upload/v1650411073/2019-07-10-095511_1824x984_scrot2-1_mfjvqs.png)
 
 次はラジコン戦車を動かすプログラムをラズパイに入れたいと思います。
 
@@ -105,7 +103,7 @@ Bluetoothを常に待ち受け状態にします。
 
 の中にあります。
 
-![](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-24-1-1024x601.png)
+![](https://res.cloudinary.com/ideatech/image/upload/v1650411076/2019-07-24-1-1024x601_cz0kro.png)
 
 この 「RemoteControl」のフォルダをラズパイゼロに移します。移す場所は\home\pi下です。
 
@@ -146,7 +144,7 @@ Bluetoothを常に待ち受け状態にします。
 
     /home/pi/RemoteControl/register_rfcomm.sh &
 
-![](http://ais.nsc.nagoya-cu.ac.jp/wp-content/uploads/2021/07/2019-07-10-100452_1824x984_scrot2-1.png)
+![](https://res.cloudinary.com/ideatech/image/upload/v1650411080/2019-07-10-100452_1824x984_scrot2-1_pw0imi.png)
 
 再起動すれば完了です。
 
