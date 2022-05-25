@@ -24,7 +24,7 @@
 
 以下のサイトのようにNOOBSでインストールすることもできます。 NOOBSでインストールすれば、インストールに時間がかかりますが、操作がわかりやすいですし、「Win32 Disk Imager」のようなソフトは必要ありません。
 
-https://qiita.com/henjiganai/items/2b39dd8cbc3cc3cbe4a4
+[https://qiita.com/henjiganai/items/2b39dd8cbc3cc3cbe4a4](https://qiita.com/henjiganai/items/2b39dd8cbc3cc3cbe4a4)
 
 # 初期設定ツールでの設定
 
@@ -51,11 +51,11 @@ https://qiita.com/henjiganai/items/2b39dd8cbc3cc3cbe4a4
 # Bluetoothのインストール
 
 Bluetoothサービスをインストールします。
-
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install bluetooth
-
+```javascript
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install bluetooth
+```
 Bluetoothサービスの設定ファイルに変更を加えます。
 
     sudo nano /etc/systemd/system/dbus-org.bluz.service
@@ -154,7 +154,7 @@ Bluetoothを常に待ち受け状態にします。
 
 ラジコン戦車の車体と繋げて動くか確認します。ラズパイゼロのピン配列はラズパイ3と同じになっているので、本に書いてあるように繋げればOKです。
 
-![](http://hara.jpn.com/images/_default/Topics/RaspPiZero/RaspPiZero.png)
+![](https://res.cloudinary.com/ideatech/image/upload/v1653488550/RaspPiZero_jykewy.png)
 
 
 実際に動かしてみた動画です。小さいバッテリでも動いてます。
